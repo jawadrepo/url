@@ -11,10 +11,41 @@
     <!-- Le styles -->
     <link href="http://localhost/shorturl/css/bootstrap.css" rel="stylesheet">
     <style type="text/css">
-	  td{
-		width:200px;
-	  }
-	  
+      body {
+        padding-top: 20px;
+        padding-bottom: 40px;
+      }
+
+      /* Custom container */
+      .container-narrow {
+        margin: 0 auto;
+        max-width: 700px;
+      }
+      .container-narrow > hr {
+        margin: 30px 0;
+      }
+
+      /* Main marketing message and sign up button */
+      .jumbotron {
+        margin: 60px 0;
+        text-align: center;
+      }
+      .jumbotron h1 {
+        font-size: 72px;
+        line-height: 1;
+      }
+      .jumbotron .btn {
+        font-size: 21px;
+        padding: 14px 24px;
+      }
+
+      /* Supporting marketing content */
+      .marketing {
+        margin: 60px 0;
+      }
+      .marketing p + h4 {
+        margin-top: 28px;
+      }
 	  iframe {
 	  margin-top: 20px;
 	  margin-bottom: 30px;
@@ -57,26 +88,14 @@
 		</div>
 	  </form>
       <hr>
-	  
-    <div class="row" >	
-		<div id="prev" name="prev" class="span4">
-		<div class="bs-docs">
-			<?php if(count($data) > 0){ ?>
-			
-			<h3>Preview Link!</h3><iframe name="pagetext"  frameborder="no" width="100%"  height="400px"  src="<?php echo $rooturl.$data[0]['unique']; ?>"></iframe>
-			
-			<?php } else {?>
-			
-			<h3>Preview Link!</h3><iframe name="pagetext"  frameborder="no" width="100%"  height="400px" src="http://localhost/phpurl/pagenotfound.php"></iframe>
-			
-			<?php }?>
-		</div>
-		</div>
-		<div class="span8" >
-			<div class="bs-docs">
+
+      <div class="row-fluid" >
+        <div class="span12">
+		<div class="span6">
+				<div class="bs-docs-example">
 					<table class="table">
 					  <thead>
-						<tr >
+						<tr>
 						  <th>Long Url</th>
 						  <th>Short Url</th>
 						  <th></th>
@@ -86,7 +105,7 @@
 					  <?php 
 					  if($data != 0 ){
 						  foreach($data as $k=>$v){
-							echo "<tr  id='".$v['unique']."' name='".$v['unique']."' ><td >".$v['url']."</td><td><a style='cousor:pointer' target='_blank' href=\"".$rooturl.$v['unique']."\" >".$rooturl.$v['unique']."</a></td><td><a href='javascript:;' onClick='deleteurl(\"".$v['unique']."\")' >Remove</a></td><td><a href='javascript:;' onClick='preview(\"".$v['unique']."\")' >Preview</a></td></tr>";
+							echo "<tr style='overflow:hidden' id='".$v['unique']."' name='".$v['unique']."' ><td>".$v['url']."</td><td><a style='cousor:pointer' target='_blank' href=\"".$rooturl.$v['unique']."\" >".$rooturl.$v['unique']."</a></td><td><a href='javascript:;' onClick='deleteurl(\"".$v['unique']."\")' >Remove</a></td><td><a href='javascript:;' onClick='preview(\"".$v['unique']."\")' >Preview</a></td></tr>";
 						  } 
 					  } 
 					  ?>
@@ -94,7 +113,25 @@
 					</table>
 				</div>
         </div>
-	</div>
+	
+        <div id="prev" name="prev" class="span6">
+		<div class="bs-docs-example">
+			<?php// if(count($data) > 0){ ?>
+			<!--
+			<h3>Preview Link!</h3><iframe name="pagetext"  frameborder="no"  height="500px" style="overflow: ture" src="<?php echo $rooturl.$data[0]['unique']; ?>"></iframe>
+			-->
+			<?php// } else {?>
+			
+			<h3>Preview Link!</h3><iframe name="pagetext"  frameborder="no"  height="500px" style="overflow: ture" src="http://localhost/phpurl/pagenotfound.php"></iframe>
+			
+			<?php// }?>
+		</div>
+		</div>
+		
+		</div>
+		
+		
+      </div>
 
       <hr>
 
@@ -103,8 +140,6 @@
       </div>
 
     </div> <!-- /container -->
-	
-	
 	<!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
@@ -112,7 +147,7 @@
 	<script>
 	
 	function preview(key){
-		var html = '<h3>Preview Link!</h3><iframe name="pagetext"  frameborder="no" width="100%" height="400px" src="<?php echo $rooturl; ?>'+key+'"></iframe>';
+		var html = '<h3>Preview Link!</h3><iframe name="pagetext"  frameborder="no" width="100%" height="500px" style="overflow: ture" src="<?php echo $rooturl; ?>'+key+'"></iframe>';
 		jQuery( "#prev" ).html(html);
 	}
 	
